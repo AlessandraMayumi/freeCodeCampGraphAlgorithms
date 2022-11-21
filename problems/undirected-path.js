@@ -32,7 +32,7 @@ const convertArrayToGraph = (edges) => {
     console.log(graph)
     return graph;
 }
-const undirectedPath = (edges, nodeA, nodeB) => {
+const undirectedPathBreadthFirst = (edges, nodeA, nodeB) => {
     const graph = convertArrayToGraph(edges);
     const alreadyVisited = new Set(); // add has
     // breadth first
@@ -49,6 +49,26 @@ const undirectedPath = (edges, nodeA, nodeB) => {
         }
     }
     return false;
+};
+
+const depthFirst = (graph, nodeA, nodeB, alreadyVisited) => {
+    console.log(nodeA);
+    if (!alreadyVisited.has(nodeA)) {
+        alreadyVisited.add(nodeA);
+        for (let neighbor of graph[nodeA]) {
+            if (neighbor == nodeB) return true;
+            else {
+                if (depthFirst(graph, neighbor, nodeB, alreadyVisited)) return true;
+            }
+        }
+    }
+    return false;
+}
+const undirectedPath = (edges, nodeA, nodeB) => {
+    const graph = convertArrayToGraph(edges);
+    const alreadyVisited = new Set(); // add has
+    // depth first
+    return depthFirst(graph, nodeA, nodeB, alreadyVisited);
 };
 
 undirectedPath(edges, 'l', 'j');
