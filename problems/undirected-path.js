@@ -101,9 +101,7 @@ const hasPath = (graph, src, dst, visited) => {
     visited.add(src);
 
     for (let neighbor of graph[src]) {
-        if (hasPath(graph, neighbor, dst, visited) === true) {
-            return true;
-        }
+        if (hasPath(graph, neighbor, dst, visited)) return true;
     }
 
     return false;
